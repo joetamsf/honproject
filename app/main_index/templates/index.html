@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Usage</title>
+    <style>
+        .tab {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .doubletab {
+            display: inline-block;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<h2>Usage</h2>
+<ul>
+    <li>(Token) After the endpoint means you are not allowed to access prior to login and obtain a token</li>
+    <li>Use Insonmia or Post to access /login endpoints, then copy 'Token' in the returned json and set Authorization headers with the Token</li>
+</ul>
+
+<p></p>|-- /<br />    
+<span class="tab"></span>|-- /show_menu<br />
+<span class="tab"></span>|-- /customers<br />
+<span class="doubletab">|-- /create_account<br />
+|-- /cancel_order   (Token)<br />
+|-- /login<br />
+|-- /my_orders  (Token)<br />
+|-- /new_order  (Token)<br />
+|-- /update_password    (Token)<br />
+|-- /verify_token   (Token)</span><br />
+<span class="tab"></span>|-- /staffs<br />
+<span class="doubletab">|-- /add    (Token)<br />
+|-- /assign_staff   (Token)<br />
+|-- /login<br />
+|-- /show_all   (Token)<br />
+|-- /show_all_orders    (Token)<br />
+|-- /update_password    (Token)</span></p>
+
+</body>
+</html>
