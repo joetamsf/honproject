@@ -84,16 +84,6 @@ WSGI_APPLICATION = 'restapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-            'default': {
-                'ENGINE': config('ENGINE'),
-                'NAME': config('DB_NAME'),
-                'HOST': config('DB_HOST'),
-                'USER': config('DB_USER'),
-                'PASSWORD': config('DB_PASSWORD'),
-                'PORT': config('DB_PORT')
-            }
-        }
 
 try:
     if config('Mode') == 'test':
@@ -104,7 +94,16 @@ try:
             }
         }
 except:
-    pass
+    DATABASES = {
+            'default': {
+                'ENGINE': config('ENGINE'),
+                'NAME': config('DB_NAME'),
+                'HOST': config('DB_HOST'),
+                'USER': config('DB_USER'),
+                'PASSWORD': config('DB_PASSWORD'),
+                'PORT': config('DB_PORT')
+            }
+        }
 
 
 # Password validation

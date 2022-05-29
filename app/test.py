@@ -48,13 +48,16 @@ def main():
     copy_env = os.environ.copy()
     copy_env['Mode'] = 'test'
 
+    proc0 = subprocess.Popen(["python", "manage.py", "makemigrations", "staffs", "orders", "customers"], env=copy_env)
+    proc0.wait()
+
     proc1 = subprocess.Popen(["python", "manage.py", "migrate"], env=copy_env)
     proc1.wait()
 
     proc2 = subprocess.Popen(["python", "test_data.py"], env=copy_env)
     proc2.wait()
 
-    proc3 = subprocess.Popen(["python", "manage.py", "runserver", "0.0.0.0:8000"], env=copy_env)
+    proc3 = subprocess.Popen(["python", "/app/manage.py", "runserver", "0.0.0.0:8000"], env=copy_env)
     time.sleep(5)
 
     token = login_test()
