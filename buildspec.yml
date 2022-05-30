@@ -13,7 +13,7 @@ phases:
       - cd app
       - docker build -t ${IMAGE_TAG} .
 
-  post-build:
+  post_build:
     commands:
       - echo running test on image...
       - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
