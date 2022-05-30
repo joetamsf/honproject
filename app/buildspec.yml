@@ -1,0 +1,27 @@
+version 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into ECR
+      - $(aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 074121654359.dkr.ecr.us-west-1.amazonaws.com)
+      - REPO_URI=074121654359.dkr.ecr.us-west-1.amazonaws.com/joetam_proj3 
+      - IMAGE_TAG=jt_hon_project
+    build:
+      - echo building image...
+      - cd app
+      - docker build -t ${IMAGE_TAG} .
+
+    post-build:
+      - echo running test on image...
+      - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
+      - |
+      if [[ ${result} = "succeeded" ]]; then
+        docker tag ${IMAGE_TAG} ${REPO_URI}:${IMAGE_TAG}
+        docker push ${REPO_URI}:${IMAGE_TAG}
+        CODEBUILD_BUILD_SUCCEEDING=1
+      else:
+        CODEBUILD_BUILD_SUCCEEDING=0
+      fi
+
+

@@ -8,8 +8,12 @@ test_url = 'http://localhost:8000'
 
 def clean_up():
     file = 'db.sqlite3'
+    logfile = 'runtest.log'
     if os.path.exists(os.path.abspath(file)):
         os.remove(os.path.abspath(file))
+
+    if os.path.exists(os.path.abspath(logfile)):
+        os.remove(os.path.abspath(logfile))
 
 def end_process(pid):
     parent = psutil.Process(pid)
@@ -44,6 +48,12 @@ def check_order(token, oid):
 
     return False
 
+def write_succeed_log():
+    print("succeeded")
+
+def write_failed_log():
+    print("failed")
+
 def main():
     copy_env = os.environ.copy()
     copy_env['Mode'] = 'test'
@@ -57,7 +67,7 @@ def main():
     proc2 = subprocess.Popen(["python", "test_data.py"], env=copy_env)
     proc2.wait()
 
-    proc3 = subprocess.Popen(["python", "/app/manage.py", "runserver", "0.0.0.0:8000"], env=copy_env)
+    proc3 = subprocess.Popen(["python", "manage.py", "runserver", "0.0.0.0:8000"], env=copy_env)
     time.sleep(5)
 
     token = login_test()
@@ -67,9 +77,11 @@ def main():
             oid = create_order(token)
         else:
             print("Testing failed at Login Stage")
+            write_failed_log()
             end_process(proc3.pid)
             proc3.kill()
     except:
+        write_failed_log()
         end_process(proc3.pid)
         proc3.kill()
 
@@ -79,14 +91,17 @@ def main():
                 print("All tests successfully completed")
             else:
                 print("Testing failed on check order")
+                write_failed_log()
                 end_process(proc3.pid)
                 proc3.kill()
         else:
             print("Testing failed on create order")
+            write_failed_log()
             end_process(proc3.pid)
             proc3.kill()
     except:
         end_process(proc3.pid)
+        write_failed_log()
         proc3.kill()
 
     end_process(proc3.pid)
@@ -98,6 +113,8 @@ if __name__ == '__main__':
     clean_up()
     main()
     clean_up()
+    write_succeed_log()
+
 
 
 
