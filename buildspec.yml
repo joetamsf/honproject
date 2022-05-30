@@ -16,6 +16,7 @@ phases:
       - echo running test on image...
       - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
       - echo $result
+      - CODEBUILD_BUILD_SUCCEEDING=1
 
 
 
