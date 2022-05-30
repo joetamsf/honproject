@@ -16,9 +16,18 @@ phases:
   post_build:
     commands:
       - echo running test on image...
-      - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
+      - result=`docker run -it ${IMAGE_TAG} python /app/test.py | tail -1`
       - echo $result
-      - CODEBUILD_BUILD_SUCCEEDING=0
+      - |-
+          if [ "$result" = "succeeded" ]; then
+            echo testing successfully completed
+            docker tag ${IMAGE_TAG} ${REPO_URI}:${IMAGE_TAG}
+            docker push ${REPO_URI}:${IMAGE_TAG}
+            CODEBUILD_BUILD_SUCCEEDING=0
+          else
+            echo testing failed
+            CODEBUILD_BUILD_SUCCEEDING=1
+          fi
 
 
 
