@@ -7,12 +7,14 @@ phases:
       - aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 074121654359.dkr.ecr.us-west-1.amazonaws.com
       - REPO_URI=074121654359.dkr.ecr.us-west-1.amazonaws.com/joetam_proj3 
       - IMAGE_TAG=jt_hon_project
-    build:
+  build:
+    commands:
       - echo building image...
       - cd app
       - docker build -t ${IMAGE_TAG} .
 
-    post-build:
+  post-build:
+    commands:
       - echo running test on image...
       - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
       - echo $result
