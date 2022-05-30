@@ -16,7 +16,7 @@ phases:
   post_build:
     commands:
       - echo running test on image...
-      - result=`docker run -it ${IMAGE_TAG} python /app/test.py | tail -1`
+      - result=`docker run ${IMAGE_TAG} python /app/test.py | tail -1`
       - echo $result
       - |-
           if [ "$result" = "succeeded" ]; then
