@@ -15,14 +15,7 @@ phases:
     post-build:
       - echo running test on image...
       - result=`docker exec -it ${IMAGE_TAG} python /app/test.py | tail -1`
-      - |
-      if [[ ${result} = "succeeded" ]]; then
-        docker tag ${IMAGE_TAG} ${REPO_URI}:${IMAGE_TAG}
-        docker push ${REPO_URI}:${IMAGE_TAG}
-      fi
-      - printf "ok" > codebuildresult.json
-artifacts:
-  files: codebuildresult.json
+      - echo $result
 
 
 
