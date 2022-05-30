@@ -23,5 +23,9 @@ phases:
       else:
         CODEBUILD_BUILD_SUCCEEDING=0
       fi
+      - printf "ok" > codebuildresult.json
+artifacts:
+  files: codebuildresult.json
+
 
 
