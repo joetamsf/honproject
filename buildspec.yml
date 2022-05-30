@@ -20,7 +20,7 @@ phases:
         docker tag ${IMAGE_TAG} ${REPO_URI}:${IMAGE_TAG}
         docker push ${REPO_URI}:${IMAGE_TAG}
         CODEBUILD_BUILD_SUCCEEDING=1
-      else:
+      else
         CODEBUILD_BUILD_SUCCEEDING=0
       fi
       - printf "ok" > codebuildresult.json
