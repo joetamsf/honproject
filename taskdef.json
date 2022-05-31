@@ -1,0 +1,59 @@
+{
+    "executionRoleArn": "arn:aws:iam::074121654359:role/ecsdefrole",
+    "containerDefinitions": [
+      {
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "protocol": "tcp",
+            "containerPort": 8000
+          }
+        ],
+        "cpu": 0,
+        "environment": [
+          {
+            "name": "DB_HOST",
+            "value": "proj3.chdqtlecyckq.us-west-1.rds.amazonaws.com"
+          },
+          {
+            "name": "DB_NAME",
+            "value": "proj3"
+          },
+          {
+            "name": "DB_PASSWORD",
+            "value": "admin123"
+          },
+          {
+            "name": "DB_PORT",
+            "value": "5432"
+          },
+          {
+            "name": "DB_USER",
+            "value": "postgres"
+          },
+          {
+            "name": "ENGINE",
+            "value": "django.db.backends.postgresql"
+          },
+          {
+            "name": "execution_svr",
+            "value": "AWS_ECS"
+          }
+        ],
+        "mountPoints": [],
+        "memory": 128,
+        "volumesFrom": [],
+        "image": "<IMAGE1_NAME>",
+        "essential": true,
+        "name": "jtproj3_blue"
+      }
+    ],
+    "placementConstraints": [],
+    "memory": "128",
+    "family": "proj3_dj",
+    "requiresCompatibilities": [
+      "EC2"
+    ],
+    "cpu": "256",
+    "volumes": []
+  }

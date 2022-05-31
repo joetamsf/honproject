@@ -28,6 +28,11 @@ phases:
             echo testing failed
             CODEBUILD_BUILD_SUCCEEDING=1
           fi
+      - echo writing artifact for codeDeploy....
+      - printf '[{"name":"jtproj3blue","imageUri":"%s"}]' ${REPO_URI}:${IMAGE_TAG} > codebuildimage.json
+      - cat codebuildimage.json
+  artifacts:
+    files: codebuildimage.json
 
 
 
