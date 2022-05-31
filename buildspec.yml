@@ -31,8 +31,8 @@ phases:
       - echo writing artifact for codeDeploy....
       - printf '[{"name":"jtproj3blue","imageUri":"%s"}]' ${REPO_URI}:${IMAGE_TAG} > codebuildimage.json
       - cat codebuildimage.json
-  artifacts:
-    files: codebuildimage.json
+artifacts:
+  files: codebuildimage.json
 
 
 
