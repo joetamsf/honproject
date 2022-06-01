@@ -36,7 +36,7 @@ artifacts:
     - ${CODEBUILD_SRC_DIR}/codebuildimage.json
     - appspec.yml
     - taskdef.json
-  secondary-artifcats:
+  secondary-artifacts:
     baseartifacts:
       files:
         - appspec.yml
