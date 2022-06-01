@@ -29,11 +29,11 @@ phases:
             CODEBUILD_BUILD_SUCCEEDING=1
           fi
       - echo writing artifact for codeDeploy....
-      - printf '{"ImageURL":"%s"}' ${REPO_URI}:${IMAGE_TAG} > ${CODEBUILD_SRC_DIR}/codebuildimage.json
-      - cat ${CODEBUILD_SRC_DIR}/codebuildimage.json
+      - printf '{"ImageURI":"%s"}' ${REPO_URI}:${IMAGE_TAG} > ${CODEBUILD_SRC_DIR}/imageDetail.json
+      - cat ${CODEBUILD_SRC_DIR}/imageDetail.json
 artifacts:
   files: 
-    - ${CODEBUILD_SRC_DIR}/codebuildimage.json
+    - ${CODEBUILD_SRC_DIR}/imageDetail.json
     - appspec.yml
     - taskdef.json
   secondary-artifacts:
@@ -43,7 +43,7 @@ artifacts:
         - taskdef.json
     ImageArtifact:
       files:
-        - codebuildimage.json
+        - imageDetail.json
 
 
 
