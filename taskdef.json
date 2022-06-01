@@ -10,34 +10,30 @@
           }
         ],
         "cpu": 0,
-        "environment": [
+        "secrets": [
           {
-            "name": "DB_HOST",
-            "value": "proj3.chdqtlecyckq.us-west-1.rds.amazonaws.com"
+            "valueFrom": "arn:aws:ssm:us-west-1:074121654359:parameter/DB_HOST",
+            "name": "DB_HOST"
           },
           {
-            "name": "DB_NAME",
-            "value": "proj3"
+            "valueFrom": "arn:aws:ssm:us-west-1:074121654359:parameter/DB_NAME",
+            "name": "DB_NAME"
           },
           {
-            "name": "DB_PASSWORD",
-            "value": "admin123"
+            "valueFrom":"arn:aws:ssm:us-west-1:074121654359:parameter/DB_PASSWORD",
+            "name": "DB_PASSWORD"
           },
           {
-            "name": "DB_PORT",
-            "value": "5432"
+            "valueFrom":"arn:aws:ssm:us-west-1:074121654359:parameter/DB_PORT",
+            "name": "DB_PORT"
           },
           {
-            "name": "DB_USER",
-            "value": "postgres"
+            "valueFrom":"arn:aws:ssm:us-west-1:074121654359:parameter/DB_USER",
+            "name": "DB_USER"
           },
           {
-            "name": "ENGINE",
-            "value": "django.db.backends.postgresql"
-          },
-          {
-            "name": "execution_svr",
-            "value": "AWS_ECS"
+            "valueFrom":"arn:aws:ssm:us-west-1:074121654359:parameter/ENGINE",
+            "name": "ENGINE"
           }
         ],
         "mountPoints": [],
