@@ -32,7 +32,18 @@ phases:
       - printf '[{"name":"jtproj3blue","imageUri":"%s"}]' ${REPO_URI}:${IMAGE_TAG} > ${CODEBUILD_SRC_DIR}/codebuildimage.json
       - cat ${CODEBUILD_SRC_DIR}/codebuildimage.json
 artifacts:
-  files: ${CODEBUILD_SRC_DIR}/codebuildimage.json
+  files: 
+    - ${CODEBUILD_SRC_DIR}/codebuildimage.json
+    - appspec.yml
+    - taskdef.json
+  secondary-artifcats:
+    baseartifacts:
+      files:
+        - appspec.yml
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - codebuildimage.json
 
 
 
